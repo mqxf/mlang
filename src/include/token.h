@@ -6,6 +6,12 @@ typedef struct TOKEN_STRUCT {
         TOKEN_ID, //name
         TOKEN_INT, //int
         TOKEN_STRING, //String
+        TOKEN_FLOAT, //float
+        TOKEN_CHAR, //char
+        TOKEN_BOOL, //bool
+        TOKEN_IF, //if
+        TOKEN_WHILE, //while
+        TOKEN_FOR, //for
         TOKEN_PLUS, //+
         TOKEN_STAR, //*
         TOKEN_DIVIDE, // /

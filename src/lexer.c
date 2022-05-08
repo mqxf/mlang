@@ -57,6 +57,12 @@ token_T* lexer_next_token(lexer_T* lexer) {
         /*
         TOKEN_INT int
         TOKEN_STRING String
+        TOKEN_FLOAT float
+        TOKEN_CHAR char
+        TOKEN_BOOL bool
+        TOKEN_IF if
+        TOKEN_FOR for
+        TOKEN_WHILE while
         TOKEN_PLUS +
         TOKEN_STAR *
         TOKEN_DIVIDE /

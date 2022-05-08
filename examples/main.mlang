@@ -1,0 +1,3 @@
+main(len:int, args:Array<String>):int => {
+    return 0;
+}

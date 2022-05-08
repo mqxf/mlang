@@ -50,11 +50,13 @@ void lexer_skip_whitespace(lexer_T *lexer) {
 token_T* lexer_parse_id(lexer_T* lexer) {
 
     char* value = calloc(1, sizeof(char));
-    while (isalpha(lexer->c)) {
+    do {
         value = realloc(value, (strlen(value) + 2) * sizeof(char));
         strcat(value, (char[]){lexer->c, 0});
         lexer_advance(lexer);
-    }
+    } while (isalpha(lexer_peek(lexer, 1)));
+    value = realloc(value, (strlen(value) + 2) * sizeof(char));
+    strcat(value, (char[]){lexer->c, 0});
 
     return init_token(value, TOKEN_ID);
 }
@@ -73,6 +75,7 @@ token_T* lexer_parse_number(lexer_T* lexer) {
 
 token_T* lexer_next_token(lexer_T* lexer) {
     while (lexer->c != '\0') {
+        lexer_skip_whitespace(lexer);
         if (isalpha(lexer->c)) {
             return lexer_advance_with(lexer, lexer_parse_id(lexer));
         }
@@ -84,31 +87,31 @@ token_T* lexer_next_token(lexer_T* lexer) {
         switch(lexer->c) {
             case '=': {
                 if (lexer_peek(lexer, 1) == '>') return lexer_advance_with(lexer, init_token("=>", TOKEN_ARROW_LARGE));
-                return lexer_advance_with(lexer, init_token("=", TOKEN_EQUALS));
+                return lexer_advance_current(lexer, TOKEN_EQUALS);
             } break;
             case '/': {
                 if (lexer_peek(lexer, 1) == '/') return lexer_advance_with(lexer, init_token("//", TOKEN_COMMENT));
-                return lexer_advance_with(lexer, init_token("/", TOKEN_DIVIDE));
+                return lexer_advance_current(lexer, TOKEN_DIVIDE);
             } break;
             case '-': {
                 if (lexer_peek(lexer, 1) == '>') return lexer_advance_with(lexer, init_token("->", TOKEN_ARROW_SMALL));
-                return lexer_advance_with(lexer, init_token("-", TOKEN_MINUS));
+                return lexer_advance_current(lexer, TOKEN_MINUS);
             } break;
             case '&': {
                 if (lexer_peek(lexer, 1) == '&') return lexer_advance_with(lexer, init_token("&&", TOKEN_AND));
-                return lexer_advance_with(lexer, init_token("&", TOKEN_ANDSIGN));
+                return lexer_advance_current(lexer, TOKEN_ANDSIGN);
             } break;
             case '|': {
                 if (lexer_peek(lexer, 1) == '|') return lexer_advance_with(lexer, init_token("||", TOKEN_OR));
-                return lexer_advance_with(lexer, init_token("|", TOKEN_BOR));
+                return lexer_advance_current(lexer, TOKEN_BOR);
             } break;
             case '>': {
                 if (lexer_peek(lexer, 1) == '>') return lexer_advance_with(lexer, init_token(">>", TOKEN_BSHIFTR));
-                return lexer_advance_with(lexer, init_token(">", TOKEN_RGRAVE));
+                return lexer_advance_current(lexer, TOKEN_RGRAVE);
             } break;
             case '<': {
                 if (lexer_peek(lexer, 1) == '<') return lexer_advance_with(lexer, init_token("<<", TOKEN_BSHIFTL));
-                return lexer_advance_with(lexer, init_token("<", TOKEN_LGRAVE));
+                return lexer_advance_current(lexer, TOKEN_LGRAVE);
             } break;
             case '(': return lexer_advance_current(lexer, TOKEN_LPAREN);
             case ')': return lexer_advance_current(lexer, TOKEN_RPAREN);

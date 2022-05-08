@@ -42,6 +42,8 @@ int main(int argc, char *argv[]) {
     }
 
     printf("Input: %s, Output: %s\n", infile, outfile);
+    
+    mlang_init(infile, outfile);
 
     free(outfile);
     free(infile);

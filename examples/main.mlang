@@ -1,3 +1,3 @@
-main(len:int, args:Array<String>):int => {
+int main(int len, Array<String> args) {
     return 0;
 }

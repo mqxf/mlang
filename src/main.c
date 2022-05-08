@@ -35,8 +35,9 @@ int main(int argc, char *argv[]) {
             strcpy(outfile, argv[3]);
         }
         else {
-            outfile = calloc(strlen(strtok(argv[1], ".")), sizeof(char));
+            outfile = calloc(strlen(strtok(argv[1], ".")) + 2, sizeof(char));
             strcpy(outfile, strtok(argv[1], "."));
+            strcat(outfile, ".s");
         }
     }
 

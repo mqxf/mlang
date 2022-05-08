@@ -1,8 +1,7 @@
+#include <stdlib.h>
 #include "include/mlang.h"
 #include "include/lexer.h"
 #include "include/file.h"
-
-const char* out;
 
 void mlang_compile(char *src) {
     lexer_T* lexer = init_lexer(src);
@@ -13,6 +12,7 @@ void mlang_compile(char *src) {
 }
 
 void mlang_init(const char* infile, const char* outfile) {
-    out = outfile;
-    mlang_compile(mlang_read(infile));
+    char *src = mlang_read(infile);
+    mlang_compile(src);
+    free(src);
 }

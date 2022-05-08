@@ -5,15 +5,12 @@ typedef struct TOKEN_STRUCT {
     enum {
         TOKEN_ID, //name, or identifier (int, String, for, etc...)
         TOKEN_INT, //int
-        TOKEN_STRING, //letters and stuff
+        TOKEN_STRING, //string value
         TOKEN_STATEMENT, //statement
         TOKEN_FLOAT, //float
-        TOKEN_CHAR, //char
-        TOKEN_BOOL, //bool
         TOKEN_PLUS, //+
         TOKEN_STAR, //*
         TOKEN_DIVIDE, // /
-        TOKEN_COMMENT, // //
         TOKEN_MINUS, //-
         TOKEN_ARROW_SMALL, //->
         TOKEN_EQUALS, //=
@@ -34,8 +31,7 @@ typedef struct TOKEN_STRUCT {
         TOKEN_COMMA, //,
         TOKEN_SEMI, //;
         TOKEN_COLON, //:
-        TOKEN_DQUOTE, //"
-        TOKEN_SQUOTE, //'
+        TOKEN_DOT, //.
         TOKEN_EOF, //EOF
     } type;
 } token_T;

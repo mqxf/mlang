@@ -16,7 +16,7 @@ lexer_T* init_lexer(char* src) {
 }
 
 void lexer_advance(lexer_T *lexer) {
-    if (lexer->i <lexer->src_size && lexer->c != '\0') {
+    if (lexer->i < lexer->src_size && lexer->c != '\0') {
         lexer->i += 1;
         lexer->c = lexer->src[lexer->i];
     }
